@@ -1,0 +1,48 @@
+name: Deploy React to Server
+
+on:
+  push:
+    branches: [ "main" ]   # 如果主分支是 master，改成 master
+  workflow_dispatch:        # 允许手动触发，方便调试
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 1. 拉取代码
+      uses: actions/checkout@v4
+
+    - name: 2. 安装 pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+
+    - name: 3. 安装 Node 环境
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+
+    - name: 4. 安装依赖并打包
+      run: |
+        pnpm install --frozen-lockfile
+        pnpm build
+
+    - name: 5. 清空服务器旧文件（防止旧 hash 资源堆积）
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          rm -rf /opt/1panel/apps/openresty/openresty/www/sites/profile/index/*
+
+    - name: 6. 上传打包产物
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        source: "dist/*"
+        target: "/opt/1panel/apps/openresty/openresty/www/sites/profile/index/"
+        strip_components: 1

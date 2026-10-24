@@ -1,0 +1,82 @@
+.project-entry { min-width: 0; scroll-margin-top: 118px; }
+.project-card { position: relative; height: 100%; overflow: hidden; border: 1px solid #e4e6e8; border-radius: 20px; background: #fff; transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s, border-color .32s; }
+.project-card-hitarea { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; border: 0; border-radius: inherit; background: transparent; }
+.project-card-hitarea:focus-visible { outline: 2px solid #111; outline-offset: -5px; }
+.project-card-cover { position: relative; overflow: hidden; border-bottom: 1px solid #e9ecee; background: #f5f6f7; }
+.project-cover-caption { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 23px 25px 0; color: #737b83; font: 9px/1.5 var(--font-sans); letter-spacing: .08em; }
+.project-cover-caption span:first-child { font-family: ui-monospace, monospace; }
+.project-cover-caption span:last-child { white-space: nowrap; font-size: 10px; letter-spacing: .02em; }
+.project-visual { display: block; width: 100%; height: auto; transition: transform .65s cubic-bezier(.22,1,.36,1); }
+.project-card-body { padding: 27px 28px 25px; }
+.project-card-body h3 { color: #111; font-size: clamp(19px,1.6vw,26px); font-weight: 550; line-height: 1.5; letter-spacing: -.025em; }
+.project-card-summary { min-height: 48px; margin-top: 10px; color: #737373; font-size: 13px; line-height: 24px; }
+.project-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 22px; padding-top: 21px; border-top: 1px solid #eee; }
+.project-card-result { display: flex; min-width: 0; flex-direction: column; gap: 7px; }
+.project-card-result strong { color: #17191b; font-size: clamp(26px,2.4vw,36px); font-weight: 500; line-height: 1.2; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+.project-card-result span { color: #858585; font-size: 11px; line-height: 1.6; }
+.project-card-action { display: flex; flex-shrink: 0; align-items: center; gap: 10px; color: #737373; font-size: 11px; }
+.project-card-arrow { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid #e4e6e8; border-radius: 50%; background: #fff; color: #222; transition: background .25s, color .25s; }
+.project-card-arrow svg { transition: transform .25s; }
+.project-card:focus-within { border-color: #adb4bb; box-shadow: 0 16px 32px -24px #1113; }
+.project-card:focus-within .project-card-arrow { color: #fff; background: #17191b; border-color: #17191b; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-4px); border-color: #bdc3c9; box-shadow: 0 20px 35px -26px #1113; }
+  .project-card:hover .project-card-cover .project-visual { transform: scale(1.025); }
+  .project-card:hover .project-card-arrow { color: #fff; background: #17191b; border-color: #17191b; }
+  .project-card:hover .project-card-arrow svg { transform: translate(1px,-1px); }
+}
+/* A native top-layer dialog keeps the header and decorative cursor behind it. */
+.project-dialog { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 28px; border: 0; background: rgb(20 23 26 / .28); color: #111; backdrop-filter: blur(7px); overscroll-behavior: contain; }
+.project-dialog[open] { display: grid; place-items: center; }
+.project-dialog::backdrop { background: transparent; }
+.project-dialog-panel { display: flex; flex-direction: column; width: min(1040px,100%); max-height: min(88dvh,1000px); overflow: hidden; border: 1px solid rgb(255 255 255 / .7); border-radius: 24px; background: #fff; box-shadow: 0 36px 120px -28px rgb(0 0 0 / .3); }
+.project-dialog-bar { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; gap: 14px; min-height: 73px; padding: 12px 26px 12px 36px; border-bottom: 1px solid #ededed; }
+.project-dialog-close { display: grid; width: 44px; height: 44px; flex-shrink: 0; place-items: center; border: 1px solid #e6e6e6; border-radius: 50%; background: #fff; transition: background .2s; }
+.project-dialog-close:hover { background: #f4f4f4; }
+.project-dialog-close:focus-visible { outline-offset: 3px; }
+.project-dialog-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 36px 42px 44px; scrollbar-width: thin; }
+.project-dialog-scroll:focus-visible { outline-offset: -3px; }
+.project-dialog-heading { margin-bottom: 33px; }
+.project-dialog-heading h2 { font-size: clamp(26px,3vw,40px); line-height: 1.35; font-weight: 550; letter-spacing: -.04em; }
+.project-dialog-heading > p { margin-top: 13px; color: #777; font-size: 14px; line-height: 1.9; }
+.project-dialog-columns { display: grid; grid-template-columns: minmax(0,1fr) 235px; gap: 44px; align-items: start; }
+.project-dialog-section h3 { margin-bottom: 15px; color: #222; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.project-dialog-section p { color: #777; font-size: 13px; line-height: 1.95; }
+.project-dialog-diagram { overflow: hidden; margin: 24px 0 30px; border: 1px solid #e6e9eb; border-radius: 13px; }
+.project-dialog-diagram figcaption { padding: 10px 14px; border-top: 1px solid #e9ecef; color: #8b9197; font-size: 10px; }
+.project-implementation-list { list-style: none; }
+.project-implementation-list li { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-top: 1px solid #eee; }
+.project-step-index { flex-shrink: 0; padding-top: 3px; color: #aaa; font: 10px/1.7 ui-monospace,monospace; }
+.project-implementation-list h4 { margin-bottom: 6px; color: #333; font-size: 13px; font-weight: 500; }
+.project-result-highlight { padding: 25px 22px; border: 1px solid #e8eaec; border-radius: 14px; background: #f7f8f9; }
+.project-result-highlight > span { color: #8a8f95; font-size: 10px; letter-spacing: .05em; }
+.project-result-highlight strong { display: block; margin-top: 20px; font-size: 34px; font-weight: 500; line-height: 1.2; letter-spacing: -.05em; white-space: nowrap; }
+.project-result-highlight p { margin-top: 10px; color: #777; font-size: 11px; line-height: 1.7; }
+.project-dialog-aside > .project-dialog-section { margin-top: 28px; }
+.project-outcome-list { list-style: none; }
+.project-outcome-list li { position: relative; margin-top: 12px; padding-left: 12px; color: #777; font-size: 12px; line-height: 1.85; }
+.project-outcome-list li::before { position: absolute; top: .8em; left: 0; width: 3px; height: 3px; border-radius: 50%; background: #a6adb3; content: ''; }
+.project-tech-list { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; }
+.project-tech-list li { padding: 7px 9px; border: 1px solid #e7e7e7; border-radius: 6px; color: #666; font: 10px/1.4 ui-monospace,monospace; }
+.project-github-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 24px; color: #333; font-size: 12px; }
+.project-github-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 767px) {
+  .project-cover-caption { padding: 19px 19px 0; font-size: 8px; }
+  .project-card-body { padding: 23px 22px; }
+  .project-card-action > span:first-child { display: none; }
+  .project-dialog { padding: 12px; }
+  .project-dialog-panel { max-height: 92dvh; border-radius: 18px; }
+  .project-dialog-bar { min-height: 68px; padding: 11px 13px 11px 22px; }
+  .project-dialog-bar > span { font-size: 8px; line-height: 1.7; }
+  .project-dialog-scroll { padding: 26px 22px 28px; }
+  .project-dialog-heading { margin-bottom: 25px; }
+  .project-dialog-heading > p { font-size: 13px; }
+  .project-dialog-columns { grid-template-columns: minmax(0,1fr); gap: 26px; }
+  .project-dialog-aside { border-top: 1px solid #e8e8e8; padding-top: 25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card, .project-visual, .project-card-arrow, .project-card-arrow svg { transform: none !important; transition: none !important; }
+}
+
+.project-loading { position: fixed; z-index: 60; right: 24px; bottom: 24px; display: flex; align-items: center; gap: 18px; padding: 16px 20px; border: 1px solid #e5e5e5; border-radius: 12px; background: #fff; color: #666; box-shadow: 0 12px 40px #0001; font-size: 13px; }
+.project-loading button { min-height: 44px; color: #111; text-decoration: underline; text-underline-offset: 4px; }

@@ -1,0 +1,51 @@
+.specular-button { min-height: 44px; border-radius: var(--sb-radius); }
+
+/* A real CSS rim stays visible without WebGL, on touch, and during context loss. */
+.specular-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--sb-base-color);
+  border-radius: inherit;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.specular-button[data-specular-ready]::after {
+  z-index: 1;
+  border: 0;
+  padding: 1.5px;
+  background: conic-gradient(
+    from calc(var(--sb-edge-angle, -45deg) - 60deg),
+    transparent 0deg,
+    var(--sb-line-color) 48deg,
+    #ffffff 60deg,
+    var(--sb-line-color) 72deg,
+    transparent 120deg 228deg,
+    color-mix(in srgb, var(--sb-line-color) 45%, transparent) 240deg,
+    transparent 252deg 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: var(--sb-edge-opacity, 0.2);
+}
+.specular-button[data-specular-ready]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 90px 45px at var(--sb-reflection-x, 10%) var(--sb-reflection-y, 10%),
+    color-mix(in srgb, var(--sb-line-color) calc(var(--sb-surface-strength, 0.3) * 100%), transparent),
+    transparent 80%
+  );
+  opacity: var(--sb-edge-opacity, 0.2);
+  pointer-events: none;
+}
+.specular-button[aria-disabled='true'] { cursor: default; opacity: 0.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .specular-button, .specular-button:hover, .specular-button:active { transform: none !important; transition: none; }
+}

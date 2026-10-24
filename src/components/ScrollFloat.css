@@ -1,0 +1,10 @@
+.scroll-float { overflow: clip; text-align: left; }
+.scroll-float-text { display: block; }
+.scroll-float-line { display: inline-block; max-width: 100%; vertical-align: top; }
+.scroll-float-block { display: block; }
+.scroll-float-unit, .scroll-float-char { display: inline-block; }
+.scroll-float-unit { white-space: nowrap; }
+.scroll-float-char { vertical-align: baseline; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-float-char { opacity: 1 !important; transform: none !important; }
+}
